@@ -22,11 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-        binding.toolbar.menu
-
     }
 
     override fun initObservers() = Unit

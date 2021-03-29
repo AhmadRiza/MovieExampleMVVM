@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@+id/root"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/roundShape"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/_1sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_thumbnail"
+            android:background="@color/background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="3:4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/MText.Subtitle"
+            android:layout_margin="@dimen/standardMargin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="The Avengers: End Game"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_year"
+            android:text="2021 • "
+            style="@style/MText.Normal.Secondary"
+            android:layout_marginTop="@dimen/halfMargin"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_rating"
+            android:text="6.7/10"
+            app:drawableTint="#FF9800"
+            android:drawablePadding="@dimen/_2sdp"
+            app:drawableStartCompat="@drawable/ic_round_star"
+            style="@style/MText.Normal.Secondary"
+            android:layout_marginTop="@dimen/halfMargin"
+            app:layout_constraintStart_toEndOf="@id/tv_year"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            style="@style/MText.Normal.Secondary"
+            tools:text="@tools:sample/lorem/random"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_year"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/halfMargin"
+            android:layout_marginHorizontal="@dimen/standardMargin"
+            android:layout_marginBottom="@dimen/standardMargin"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

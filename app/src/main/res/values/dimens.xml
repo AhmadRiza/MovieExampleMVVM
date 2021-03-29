@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="textHeadline">@dimen/_20ssp</dimen>
+    <dimen name="textSubTitle">@dimen/_11ssp</dimen>
+    <dimen name="textTitle">@dimen/_13ssp</dimen>
+    <dimen name="textRegular">@dimen/_11ssp</dimen>
+    <dimen name="textMini">@dimen/_10ssp</dimen>
+
+    <dimen name="parentPadding">@dimen/_12sdp</dimen>
+    <dimen name="standardMargin">@dimen/_8sdp</dimen>
+    <dimen name="halfMargin">@dimen/_4sdp</dimen>
+    <dimen name="longMargin">@dimen/_16sdp</dimen>
+
+
+    <dimen name="roundShape">@dimen/_6sdp</dimen>
+    <dimen name="separatorH">@dimen/_1sdp</dimen>
+    <dimen name="hairline">0.8dp</dimen>
+    <dimen name="buttonCorner">@dimen/_4sdp</dimen>
+
+</resources>

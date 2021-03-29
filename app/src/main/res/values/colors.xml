@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background">#F6F7FB</color>
+    <color name="separator">#1A293340</color>
+    <color name="disabled">#66293340</color>
+    <!--    text-->
+
+    <color name="textPrimary">#293340</color>
+    <color name="textSecondary">#99293340</color>
+    <color name="red">#FF4C51</color>
+
+    <color name="yellow">#FF9800</color>
+
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="MText">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="MText.Normal">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textSize">@dimen/textRegular</item>
+    </style>
+
+    <style name="MText.Normal.Secondary">
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <style name="MText.Normal.Link">
+        <item name="fontFamily">@font/bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="MText.Headline">
+        <item name="android:textSize">@dimen/textHeadline</item>
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+    <style name="MText.SubHeadline" parent="MText.Headline">
+        <item name="android:letterSpacing">0.07</item>
+        <item name="android:textSize">@dimen/textMini</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <style name="MText.Title">
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:textSize">@dimen/textTitle</item>
+    </style>
+
+    <style name="MText.Subtitle" parent="MText.Title">
+        <item name="android:textSize">@dimen/textSubTitle</item>
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
+</resources>

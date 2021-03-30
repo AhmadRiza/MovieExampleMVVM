@@ -10,9 +10,7 @@ import com.github.ahmadriza.movie.BuildConfig
 import com.github.ahmadriza.movie.R
 import com.github.ahmadriza.movie.databinding.ItemMovieBinding
 import com.github.ahmadriza.movie.models.MovieItem
-import com.github.ahmadriza.movie.utils.getBindingOf
-import com.github.ahmadriza.movie.utils.loadImage
-import com.github.ahmadriza.movie.utils.setMaxLinesForEllipsizing
+import com.github.ahmadriza.movie.utils.*
 
 class MovieAdapter : PagingDataAdapter<MovieItem, RecyclerView.ViewHolder>(
     MovieModelComparator
@@ -24,7 +22,7 @@ class MovieAdapter : PagingDataAdapter<MovieItem, RecyclerView.ViewHolder>(
         val movie = getItem(position)!!
         (holder as MovieViewHolder).apply {
             binding.tvTitle.text = movie.title
-            binding.tvYear.text = movie.releaseDate
+            binding.tvYear.text = movie.releaseDate.toDateOrNull()?.displayYear
             binding.tvRating.text = "${movie.voteAvg}/10"
             binding.tvOverview.text = movie.overview
             binding.tvOverview.setMaxLinesForEllipsizing()

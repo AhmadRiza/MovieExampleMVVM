@@ -1,5 +1,6 @@
 package com.github.ahmadriza.movie.data.network
 
+import com.github.ahmadriza.movie.BuildConfig
 import com.github.ahmadriza.movie.models.MovieDetail
 import com.github.ahmadriza.movie.models.MovieItem
 import com.github.ahmadriza.movie.models.PaginationResponse
@@ -23,6 +24,11 @@ interface MovieApi {
 
     @GET("movie/top_rated")
     suspend fun getTopRated(
+        @Query("page") page: Int
+    ): Response<PaginationResponse<MovieItem>>
+
+    @GET("movie/upcoming")
+    suspend fun getUpcoming(
         @Query("page") page: Int
     ): Response<PaginationResponse<MovieItem>>
 

@@ -21,6 +21,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.3"/>
 
+            <!--source image = 200x300-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_thumbnail"
                 android:background="@color/background"
@@ -29,7 +30,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="3:4"
+                app:layout_constraintDimensionRatio="2:3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline"/>
 

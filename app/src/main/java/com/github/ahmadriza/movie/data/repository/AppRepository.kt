@@ -35,6 +35,13 @@ class AppRepository @Inject constructor(
         }
     }
 
+    suspend fun getUpcomingMovie(page: Int) : PaginationResponse<MovieItem> {
+        return when(val result = movieService.upcoming(page)){
+            is DataResult.Success -> result.data
+            is DataResult.Error -> throw result.error
+        }
+    }
+
 
 
 }

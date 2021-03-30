@@ -16,16 +16,22 @@ class MovieListViewModel @ViewModelInject constructor(
 
     private var currentCategory: Int = 0
 
-    val movieDataSource: Flow<PagingData<MovieItem>> = Pager(PagingConfig(20)){
-        MoviePagingSource{
-            when(currentCategory){
-                0 -> repository.topRatedMovie(it)
-                else-> throw Exception()
+    val movieDataSource: Flow<PagingData<MovieItem>> = Pager(PagingConfig(20)) {
+        MoviePagingSource {
+            when (currentCategory) {
+                0 -> repository.popularMovie(it)
+                1 -> repository.getUpcomingMovie(it)
+                2 -> repository.topRatedMovie(it)
+                3 -> repository.getNowPlayingMovie(it)
+                else -> throw Exception()
             }
         }
     }.flow
 
-    fun setCategory(category: Int) {
-        this.currentCategory = category
+    fun setCategory(index: Int) {
+        this.currentCategory = index
     }
+
+    fun getSelectedCategory() = currentCategory
+
 }

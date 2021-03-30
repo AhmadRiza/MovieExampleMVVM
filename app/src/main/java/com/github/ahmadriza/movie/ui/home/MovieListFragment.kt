@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.paging.LoadState
 import com.github.ahmadriza.movie.R
 import com.github.ahmadriza.movie.databinding.FragmentMovieListBinding
+import com.github.ahmadriza.movie.ui.category.CategorySelectorSheet
 import com.github.ahmadriza.movie.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,7 +21,9 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
 
     private val viewModel: MovieListViewModel by viewModels()
     private val movieAdapter by lazy { MovieAdapter() }
-    override fun getLayoutResource(): Int  = R.layout.fragment_movie_list
+    override fun getLayoutResource(): Int = R.layout.fragment_movie_list
+
+    private val sheetCategory by lazy { CategorySelectorSheet() }
 
     override fun initViews() {
 
@@ -30,7 +33,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
 
         binding.rvMovies.setHasFixedSize(true)
         binding.rvMovies.adapter = movieAdapter.withLoadStateFooter(
-            MovieLoadStateAdapter{
+            MovieLoadStateAdapter {
                 movieAdapter.retry()
             }
         )
@@ -38,6 +41,17 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
 
         movieAdapter.addLoadStateListener {
             binding.swipeRefresh.isRefreshing = it.refresh is LoadState.Loading
+        }
+
+        binding.btnCategory.setOnClickListener {
+            activity?.run {
+                CategorySelectorSheet.getInstance(viewModel.getSelectedCategory()) { category, position ->
+                    binding.tvCategory.text = category.name
+                    viewModel.setCategory(position)
+                    movieAdapter.refresh()
+                    binding.rvMovies.scrollToPosition(0)
+                }.show(supportFragmentManager, "Category")
+            }
         }
 
     }
@@ -53,6 +67,11 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
 
     }
 
-    override fun initData() = Unit
+    override fun initData() {
+
+        val defaultCategory = resources.getStringArray(R.array.categories)[0]
+        binding.tvCategory.text = defaultCategory
+
+    }
 
 }

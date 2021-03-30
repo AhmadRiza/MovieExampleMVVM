@@ -44,6 +44,7 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <FrameLayout
+            android:id="@+id/btn_category"
             android:background="@drawable/bg_category"
             android:paddingVertical="@dimen/standardMargin"
             android:paddingHorizontal="@dimen/parentPadding"
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_category"
                 android:gravity="center"
                 android:layout_gravity="center"
                 style="@style/MText.Subtitle"

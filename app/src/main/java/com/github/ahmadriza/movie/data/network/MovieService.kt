@@ -11,6 +11,7 @@ class MovieService @Inject constructor(
     suspend fun popularMovies(page: Int) = createCall { api.getPopular(page) }
     suspend fun nowPlaying(page: Int) = createCall { api.getNowPlaying(page) }
     suspend fun topRated(page: Int) = createCall { api.getTopRated(page) }
+    suspend fun upcoming(page: Int) = createCall { api.getUpcoming(page) }
     suspend fun getDetails(id: Long) = createCall { api.getMovieDetails(id) }
     suspend fun getReviews(movieId: Long, page: Int) = createCall { api.getMovieReviews(movieId, page) }
 

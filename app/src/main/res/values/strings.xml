@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">My Movie</string>
 
+    <array name="categories">
+        <item>Popular</item>
+        <item>Upcoming</item>
+        <item>Top Rated</item>
+        <item>Now Playing</item>
+    </array>
+
+
+
 </resources>

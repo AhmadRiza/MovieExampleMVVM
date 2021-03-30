@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatEditText
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.github.ahmadriza.movie.utils.android.CurrencyTextWatcher
 import com.github.ahmadriza.movie.utils.android.DelayTextWatcher
 import com.github.ahmadriza.movie.utils.android.InfiniteScrollListener
@@ -26,30 +28,6 @@ import com.github.ahmadriza.movie.utils.android.InfiniteScrollListener
  */
 
 fun Context.getCompatColor(@ColorRes color: Int) = ContextCompat.getColor(this, color)
-
-fun View.disable() {
-    isEnabled = false
-}
-
-fun View.enable() {
-    isEnabled = true
-}
-
-fun View.visible() {
-    visibility = View.VISIBLE
-}
-
-fun View.gone() {
-    visibility = View.GONE
-}
-
-fun View.invisible() {
-    visibility = View.INVISIBLE
-}
-
-fun View.visibleOrGone(isVisible: Boolean) {
-    if (isVisible) visible() else gone()
-}
 
 fun String.isAnValidEmail(): Boolean {
     return if (isNullOrBlank()) {
@@ -140,4 +118,10 @@ fun RecyclerView.onScrollLoad(threshold: Int, action:()->Unit){
 fun TextView.setMaxLinesForEllipsizing() = doOnPreDraw {
     val numberOfCompletelyVisibleLines = (measuredHeight - paddingTop - paddingBottom) / lineHeight
     maxLines = numberOfCompletelyVisibleLines
+}
+
+fun ImageView.loadImage(url: String){
+    Glide.with(this)
+        .load(url)
+        .into(this)
 }

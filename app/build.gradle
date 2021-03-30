@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.github.ahmadriza.stockbit"
+        applicationId "com.github.ahmadriza.movie"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -28,6 +28,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'BASE_URL', baseUrl
         it.buildConfigField 'String', 'API_KEY', apiKey
+        it.buildConfigField 'String', 'IMG_URL_S', baseImgSmall
     }
 
     compileOptions {
@@ -64,7 +65,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //Lifecycle
-    def lifecycle_version = "2.3.1"
+    def lifecycle_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
@@ -74,6 +75,9 @@ dependencies {
     def coroutines_android_version = '1.3.9'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha09"
 
     //Hilt
     implementation 'com.google.dagger:hilt-android:2.28.1-alpha'

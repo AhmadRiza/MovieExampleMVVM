@@ -1,4 +1,4 @@
-package com.github.ahmadriza.movie.data.remote.interceptor
+package com.github.ahmadriza.movie.data.network.interceptor
 
 import com.github.ahmadriza.movie.BuildConfig
 import okhttp3.Interceptor
@@ -14,11 +14,12 @@ class AuthInterceptor @Inject constructor() :
     override fun intercept(chain: Interceptor.Chain): Response {
 
         val req = chain.request()
-        val builder = req.newBuilder()
+        val url = req.url.newBuilder()
+            .addQueryParameter("api_key", BuildConfig.API_KEY)
+            .build()
+        val newReq = req.newBuilder().url(url).build()
 
-        builder.header("Authorization", "Apikey ${BuildConfig.API_KEY}")
-
-        return chain.proceed(builder.build())
+        return chain.proceed(newReq)
     }
 
 }

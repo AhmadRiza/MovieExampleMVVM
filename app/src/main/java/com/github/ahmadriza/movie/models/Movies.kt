@@ -14,8 +14,7 @@ data class MovieItem(
     @SerializedName("release_date") val releaseDate: String,
     val title: String,
     @SerializedName("original_title") val originalTitle: String,
-    @SerializedName("vote_average") val voteAvg: Float,
-    val isFavorite: Boolean = false
+    @SerializedName("vote_average") val voteAvg: Float
 
 )
 

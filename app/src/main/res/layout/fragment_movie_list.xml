@@ -25,6 +25,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -32,6 +33,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:paddingBottom="@dimen/_100sdp"
                 android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:paddingHorizontal="@dimen/halfMargin"
                 android:paddingTop="@dimen/halfMargin"
                 tools:listitem="@layout/item_movie"

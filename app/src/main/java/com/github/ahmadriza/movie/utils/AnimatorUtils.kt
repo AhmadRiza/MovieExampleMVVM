@@ -9,7 +9,6 @@ import com.github.ahmadriza.movie.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.runOnUiThread
 
 /**
  * Created by riza@deliv.co.id on 10/21/19.
@@ -29,9 +28,9 @@ fun View.jump(y: Float) {
 
 fun View.wheel(duration: Long) {
     GlobalScope.launch {
-        context.runOnUiThread { wheel() }
+         wheel()
         delay(duration)
-        context.runOnUiThread { silent() }
+        silent()
     }
 }
 

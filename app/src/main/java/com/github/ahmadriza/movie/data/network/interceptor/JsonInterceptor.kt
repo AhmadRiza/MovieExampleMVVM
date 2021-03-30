@@ -1,4 +1,4 @@
-package com.github.ahmadriza.movie.data.remote.interceptor
+package com.github.ahmadriza.movie.data.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

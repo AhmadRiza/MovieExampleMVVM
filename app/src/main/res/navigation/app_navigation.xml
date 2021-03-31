@@ -12,10 +12,14 @@
         android:label="@string/app_name" >
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_movieListFragment_to_movieFavoriteFragment"
-            app:destination="@id/movieFavoriteFragment" />
+            app:destination="@id/movieFavoriteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_movie_details"
@@ -33,6 +37,8 @@
         android:label="My Favorite Movie" >
         <action
             android:id="@+id/action_movieFavoriteFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 </navigation>

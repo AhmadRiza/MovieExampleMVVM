@@ -61,7 +61,6 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
                 binding.swipeRefresh.isRefreshing = false
             }
                 .onStart { binding.swipeRefresh.isRefreshing = true }
-                .onCompletion { binding.swipeRefresh.isRefreshing = false }
                 .collectLatest {
                     updateUI(it)
                     binding.swipeRefresh.isRefreshing = false

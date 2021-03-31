@@ -24,7 +24,6 @@ class MovieDetailViewModel @ViewModelInject constructor(
     private val _id = MutableLiveData<Long>()
     val isFavorite: LiveData<Boolean> = _id.switchMap { repository.findMovieInFavorite(it) }.map { it != null }
 
-
     val detail: Flow<MovieDetail> = _id.asFlow().map {
         repository.getMovieDetail(it)
     }

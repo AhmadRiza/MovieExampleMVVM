@@ -27,6 +27,7 @@
         -->
 
         <activity
+            android:screenOrientation="portrait"
             android:name="com.github.ahmadriza.movie.ui.main.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>

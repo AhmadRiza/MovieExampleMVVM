@@ -102,6 +102,7 @@
                         android:id="@+id/tv_details"
                         style="@style/MText.Normal.Secondary"
                         android:layout_width="0dp"
+                        android:minLines="5"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/halfMargin"
                         android:layout_marginBottom="@dimen/standardMargin"
@@ -214,6 +215,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_60sdp"
                         android:text="Such an empty"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/rv_reviews" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/error_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_60sdp"
+                        android:layout_marginHorizontal="@dimen/parentPadding"
+                        android:text="Something wrong, swipe down to refresh"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/rv_reviews" />

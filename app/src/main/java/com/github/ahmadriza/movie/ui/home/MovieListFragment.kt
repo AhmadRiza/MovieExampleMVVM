@@ -1,6 +1,7 @@
 package com.github.ahmadriza.movie.ui.home
 
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -39,6 +40,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(), MovieAdapter
 
         movieAdapter.addLoadStateListener {
             binding.swipeRefresh.isRefreshing = it.refresh is LoadState.Loading
+            binding.tvError.isVisible = it.refresh is LoadState.Error
         }
 
         binding.btnCategory.setOnClickListener {

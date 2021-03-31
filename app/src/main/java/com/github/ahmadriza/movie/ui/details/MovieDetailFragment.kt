@@ -19,10 +19,7 @@ import com.github.ahmadriza.movie.ui.home.MovieLoadStateAdapter
 import com.github.ahmadriza.movie.utils.*
 import com.github.ahmadriza.movie.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onEmpty
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -38,7 +35,10 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
 
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.setupWithNavController(findNavController(), appBarConfiguration)
-        binding.swipeRefresh.setOnRefreshListener { viewModel.loadData(args.MovieItem.id) }
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.loadData(args.MovieItem.id)
+            reviewsAdapter.refresh()
+        }
 
         binding.rvReviews.adapter = reviewsAdapter.withLoadStateFooter(MovieLoadStateAdapter {
             reviewsAdapter.retry()
@@ -48,6 +48,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
             binding.loadingReviews.isVisible = it.refresh is LoadState.Loading
             binding.emptyMessage.isVisible = (it.refresh is LoadState.NotLoading
                     && reviewsAdapter.itemCount == 0)
+            binding.errorMessage.isVisible = it.refresh is LoadState.Error
         }
 
     }
@@ -58,12 +59,13 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
             viewModel.detail.catch {
                 Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
                 binding.swipeRefresh.isRefreshing = false
-            }.onStart {
-                binding.swipeRefresh.isRefreshing = true
-            }.collectLatest {
-                updateUI(it)
-                binding.swipeRefresh.isRefreshing = false
             }
+                .onStart { binding.swipeRefresh.isRefreshing = true }
+                .onCompletion { binding.swipeRefresh.isRefreshing = false }
+                .collectLatest {
+                    updateUI(it)
+                    binding.swipeRefresh.isRefreshing = false
+                }
 
         }
 
@@ -79,18 +81,21 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initData() {
         binding.toolbar.title = args.MovieItem.title
         viewModel.loadData(args.MovieItem.id)
+        args.MovieItem.let { movie ->
+            binding.tvTitle.text = movie.title
+            binding.tvYear.text = "${movie.releaseDate.toDateOrNull()?.displayYear} $DOT "
+            binding.tvRating.text = "${movie.voteAvg}/10"
+            binding.tvOverview.text = movie.overview
+            binding.imgThumbnail.loadImage(BuildConfig.IMG_URL_S + movie.posterPath, 8.px)
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(movie: MovieDetail) {
-        binding.tvTitle.text = movie.title
-        binding.tvYear.text = "${movie.releaseDate.toDateOrNull()?.displayYear} $DOT "
-        binding.tvRating.text = "${movie.voteAvg}/10"
-        binding.tvOverview.text = movie.overview
-        binding.imgThumbnail.loadImage(BuildConfig.IMG_URL_S + movie.posterPath, 8.px)
         val details = StringBuilder()
         details.append("<b>Genre(s):</b> ")
         movie.genres.forEachIndexed { i, it ->

@@ -25,8 +25,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(), MovieAdapter
     override fun getLayoutResource(): Int = R.layout.fragment_movie_list
 
     override fun initViews() {
-
-        binding.toolbar.inflateMenu(R.menu.menu_home)
+        setupToolBar()
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.setupWithNavController(findNavController(), appBarConfiguration)
 
@@ -46,13 +45,29 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(), MovieAdapter
             activity?.run {
                 CategorySelectorSheet.getInstance(viewModel.getSelectedCategory()) { category, position ->
                     binding.tvCategory.text = category.name
+                    binding.rvMovies.scrollToPosition(0)
                     viewModel.setCategory(position)
                     movieAdapter.refresh()
-                    binding.rvMovies.scrollToPosition(0)
                 }.show(supportFragmentManager, "Category")
             }
         }
 
+    }
+
+    private fun setupToolBar() {
+
+        binding.toolbar.inflateMenu(R.menu.menu_home)
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_favorite -> {
+                    findNavController().navigate(
+                        MovieListFragmentDirections.actionMovieListFragmentToMovieFavoriteFragment()
+                    )
+                }
+            }
+
+            true
+        }
     }
 
     override fun initObservers() {
@@ -67,7 +82,8 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(), MovieAdapter
 
     override fun initData() {
 
-        val defaultCategory = resources.getStringArray(R.array.categories)[viewModel.getSelectedCategory()]
+        val defaultCategory =
+            resources.getStringArray(R.array.categories)[viewModel.getSelectedCategory()]
         binding.tvCategory.text = defaultCategory
 
     }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_user"
+            android:layout_width="@dimen/_32sdp"
+            android:background="@drawable/bg_circle"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_margin="@dimen/parentPadding"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            style="@style/MText.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standardMargin"
+            android:textSize="@dimen/textMini"
+            app:layout_constraintStart_toEndOf="@id/img_user"
+            app:layout_constraintTop_toTopOf="@id/img_user"
+            tools:text="Ahmad Riza" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            style="@style/MText.Normal.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standardMargin"
+            android:layout_marginEnd="@dimen/parentPadding"
+            android:textSize="@dimen/textMini"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            tools:text="3 days ago" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_username"
+            style="@style/MText.Normal.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textMini"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="ahmadriza" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_desc"
+            style="@style/MText.Normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standardMargin"
+            android:layout_marginTop="@dimen/halfMargin"
+            android:layout_marginEnd="@dimen/parentPadding"
+            android:layout_marginBottom="@dimen/parentPadding"
+            android:textSize="@dimen/textMini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_user"
+            app:layout_constraintTop_toBottomOf="@id/rating_bar"
+            tools:lines="3"
+            tools:text="@tools:sample/lorem/random" />
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/hairline"
+            android:background="@color/separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_user"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_bar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/halfMargin"
+            android:layout_marginEnd="@dimen/parentPadding"
+            android:isIndicator="true"
+            android:max="10"
+            android:numStars="10"
+            android:rating="8"
+            android:stepSize="1"
+            android:theme="@style/MRatingBar"
+            app:layout_constraintStart_toStartOf="@id/tv_username"
+            app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

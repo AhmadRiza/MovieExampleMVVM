@@ -9,17 +9,30 @@
         android:id="@+id/movieListFragment"
         tools:layout="@layout/fragment_movie_list"
         android:name="com.github.ahmadriza.movie.ui.home.MovieListFragment"
-        android:label="MovieListFragment" >
+        android:label="@string/app_name" >
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_movieFavoriteFragment"
+            app:destination="@id/movieFavoriteFragment" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_movie_details"
         android:id="@+id/movieDetailFragment"
         android:name="com.github.ahmadriza.movie.ui.details.MovieDetailFragment"
         android:label="MovieDetailFragment" >
         <argument
             android:name="MovieItem"
             app:argType="com.github.ahmadriza.movie.models.MovieItem" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_movie_favorite"
+        android:id="@+id/movieFavoriteFragment"
+        android:name="com.github.ahmadriza.movie.ui.favorite.MovieFavoriteFragment"
+        android:label="My Favorite Movie" >
+        <action
+            android:id="@+id/action_movieFavoriteFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>

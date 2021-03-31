@@ -2,21 +2,26 @@ package com.github.ahmadriza.movie.ui.details
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import com.github.ahmadriza.movie.BuildConfig
 import com.github.ahmadriza.movie.R
 import com.github.ahmadriza.movie.databinding.FragmentMovieDetailsBinding
 import com.github.ahmadriza.movie.models.MovieDetail
+import com.github.ahmadriza.movie.ui.home.MovieLoadStateAdapter
 import com.github.ahmadriza.movie.utils.*
 import com.github.ahmadriza.movie.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
@@ -25,6 +30,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
 
     private val args: MovieDetailFragmentArgs by navArgs()
     private val viewModel: MovieDetailViewModel by viewModels()
+    private val reviewsAdapter by lazy { MovieReviewsAdapter() }
 
     override fun getLayoutResource(): Int = R.layout.fragment_movie_details
 
@@ -33,6 +39,17 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.setupWithNavController(findNavController(), appBarConfiguration)
         binding.swipeRefresh.setOnRefreshListener { viewModel.loadData(args.MovieItem.id) }
+
+        binding.rvReviews.adapter = reviewsAdapter.withLoadStateFooter(MovieLoadStateAdapter {
+            reviewsAdapter.retry()
+        })
+
+        reviewsAdapter.addLoadStateListener {
+            binding.loadingReviews.isVisible = it.refresh is LoadState.Loading
+            binding.emptyMessage.isVisible = (it.refresh is LoadState.NotLoading
+                    && reviewsAdapter.itemCount == 0)
+        }
+
     }
 
     override fun initObservers() {
@@ -48,6 +65,12 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
                 binding.swipeRefresh.isRefreshing = false
             }
 
+        }
+
+        lifecycleScope.launch {
+            viewModel.reviews.collectLatest {
+                reviewsAdapter.submitData(it)
+            }
         }
 
 
@@ -67,26 +90,26 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         binding.tvYear.text = "${movie.releaseDate.toDateOrNull()?.displayYear} $DOT "
         binding.tvRating.text = "${movie.voteAvg}/10"
         binding.tvOverview.text = movie.overview
-        binding.imgThumbnail.loadImage(BuildConfig.IMG_URL_S + movie.posterPath, 8)
+        binding.imgThumbnail.loadImage(BuildConfig.IMG_URL_S + movie.posterPath, 8.px)
         val details = StringBuilder()
         details.append("<b>Genre(s):</b> ")
         movie.genres.forEachIndexed { i, it ->
-            details.append("${it.name}")
+            details.append(it.name)
             if (i < movie.genres.lastIndex) details.append(", ")
         }
         details.append("<br>").append("<b>Language(s):</b> ")
         movie.languages.forEachIndexed { i, it ->
-            details.append("${it.name}")
+            details.append(it.name)
             if (i < movie.languages.lastIndex) details.append(", ")
         }
         details.append("<br>").append("<b>Production(s):</b> ")
         movie.productions.forEachIndexed { i, it ->
-            details.append("${it.name}")
+            details.append(it.name)
             if (i < movie.productions.lastIndex) details.append(", ")
         }
         details.append("<br>").append("<b>Country(s):</b> ")
         movie.countries.forEachIndexed { i, it ->
-            details.append("${it.name}")
+            details.append(it.name)
             if (i < movie.countries.lastIndex) details.append(", ")
         }
         binding.tvDetails.loadHTML(details.toString())

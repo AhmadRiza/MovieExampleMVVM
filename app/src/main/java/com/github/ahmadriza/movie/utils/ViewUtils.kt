@@ -2,6 +2,7 @@ package com.github.ahmadriza.movie.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -33,6 +34,11 @@ import com.github.ahmadriza.movie.utils.android.InfiniteScrollListener
 /**
  * Created on 11/28/20.
  */
+
+inline val Int.dp: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+inline val Int.px: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 fun Context.getCompatColor(@ColorRes color: Int) = ContextCompat.getColor(this, color)
 
@@ -69,7 +75,7 @@ fun AppCompatButton.setDrawableIcon(
 }
 
 fun AppCompatButton.setDrawableTint(color: Int) {
-    val drawables: Array<Drawable> = compoundDrawables
+    val drawables: Array<Drawable?> = compoundDrawables
     for (drawable in drawables) {
         if (drawable != null) {
             val wrappedDrawable = DrawableCompat.wrap(drawable)
@@ -79,6 +85,7 @@ fun AppCompatButton.setDrawableTint(color: Int) {
 }
 
 
+@Suppress("DEPRECATION")
 fun TextView.loadHTML(html: String) {
     text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT)
@@ -146,9 +153,12 @@ fun TextView.setMaxLinesForEllipsizing() = doOnPreDraw {
     maxLines = numberOfCompletelyVisibleLines
 }
 
-fun ImageView.loadImage(url: String, roundCorner: Int = 0) {
+fun ImageView.loadImage(url: String, roundCorner: Int = 0, makeItCircle: Boolean = false) {
     val builder = Glide.with(this)
         .load(url)
-    if (roundCorner > 0) builder.transform(CenterCrop(), RoundedCorners(roundCorner))
+
+    if(makeItCircle) builder.circleCrop()
+    else if (roundCorner > 0) builder.transform(CenterCrop(), RoundedCorners(roundCorner))
+
     builder.into(this)
 }

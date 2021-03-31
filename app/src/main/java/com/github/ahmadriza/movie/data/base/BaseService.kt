@@ -1,14 +1,10 @@
 package com.github.ahmadriza.movie.data.base
 
 import com.github.ahmadriza.movie.models.DataResult
-import com.github.ahmadriza.movie.models.ResponseError
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
-import com.training.pagingsample.data.network.exceptions.NoInternetException
-import com.training.pagingsample.data.network.exceptions.NotFoundException
-import com.training.pagingsample.data.network.exceptions.UnAuthorizedException
-import com.training.pagingsample.data.network.exceptions.UnKnownException
-import okhttp3.ResponseBody
+import com.github.ahmadriza.movie.data.network.exception.NoInternetException
+import com.github.ahmadriza.movie.data.network.exception.NotFoundException
+import com.github.ahmadriza.movie.data.network.exception.UnAuthorizedException
+import com.github.ahmadriza.movie.data.network.exception.UnKnownException
 import retrofit2.HttpException
 import retrofit2.Response
 import java.lang.Exception

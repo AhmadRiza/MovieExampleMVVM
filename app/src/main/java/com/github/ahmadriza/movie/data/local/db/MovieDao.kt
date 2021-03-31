@@ -1,6 +1,7 @@
 package com.github.ahmadriza.movie.data.local.db
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.github.ahmadriza.movie.models.MovieItem
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface MovieFavoriteDao {
 
     @Query("SELECT * FROM MovieItem ")
-    fun getFavoriteMovie(): Flow<List<MovieItem>>
+    fun getFavoriteMovie(): DataSource.Factory<Int, MovieItem>
 
     @Query("SELECT * FROM MovieItem WHERE id = :movieId")
     fun getMovie(movieId: Long): LiveData<MovieItem?>

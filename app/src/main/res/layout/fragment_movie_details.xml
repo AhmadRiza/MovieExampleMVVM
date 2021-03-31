@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:background="@color/white">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
-            android:theme="@style/AppTheme"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                app:title="@string/app_name"
+                android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarTheme"
-                app:titleTextColor="@color/white"
+                app:title="@string/app_name"
                 app:titleTextAppearance="@style/MText.Title"
-                android:layout_height="?attr/actionBarSize"/>
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -46,156 +47,177 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.33"/>
+                        app:layout_constraintGuide_percent="0.33" />
 
                     <!--source image = 200x300-->
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_thumbnail"
-                        android:background="@color/background"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:scaleType="centerCrop"
                         android:layout_marginStart="@dimen/parentPadding"
                         android:layout_marginTop="@dimen/parentPadding"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@color/background"
+                        android:scaleType="centerCrop"
                         app:layout_constraintDimensionRatio="2:3"
+                        app:layout_constraintEnd_toStartOf="@id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/guideline"/>
-
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_title"
+                        style="@style/MText.Title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        style="@style/MText.Title"
-                        android:layout_marginHorizontal="@dimen/standardMargin"
-                        app:layout_constraintTop_toTopOf="@id/img_thumbnail"
-                        app:layout_constraintStart_toEndOf="@id/guideline"
+                        android:layout_marginHorizontal="@dimen/parentPadding"
                         app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="The Avengers: End Game"/>
+                        app:layout_constraintStart_toEndOf="@id/guideline"
+                        app:layout_constraintTop_toTopOf="@id/img_thumbnail"
+                        tools:text="The Avengers: End Game" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_year"
-                        android:text="2021 • "
                         style="@style/MText.Normal"
-                        android:layout_marginTop="@dimen/halfMargin"
-                        app:layout_constraintStart_toStartOf="@id/tv_title"
-                        app:layout_constraintTop_toBottomOf="@id/tv_title"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/halfMargin"
+                        android:text="2021 • "
+                        app:layout_constraintStart_toStartOf="@id/tv_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_rating"
-                        android:text="6.7/10"
-                        app:drawableTint="#FF9800"
-                        android:drawablePadding="@dimen/_2sdp"
-                        app:drawableStartCompat="@drawable/ic_round_star"
                         style="@style/MText.Normal"
-                        android:layout_marginTop="@dimen/halfMargin"
-                        app:layout_constraintStart_toEndOf="@id/tv_year"
-                        app:layout_constraintTop_toBottomOf="@id/tv_title"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/halfMargin"
+                        android:drawablePadding="@dimen/_2sdp"
+                        android:text="6.7/10"
+                        app:drawableStartCompat="@drawable/ic_round_star"
+                        app:drawableTint="#FF9800"
+                        app:layout_constraintStart_toEndOf="@id/tv_year"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_details"
+                        style="@style/MText.Normal.Secondary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        style="@style/MText.Normal.Secondary"
-                        tools:lines="5"
-                        android:textSize="@dimen/textMini"
-                        tools:text="@tools:sample/lorem/random"
-                        app:layout_constraintStart_toEndOf="@id/guideline"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_year"
                         android:layout_marginTop="@dimen/halfMargin"
-                        android:layout_marginHorizontal="@dimen/standardMargin"
-                        android:layout_marginBottom="@dimen/standardMargin"/>
+                        android:layout_marginBottom="@dimen/standardMargin"
+                        android:textSize="@dimen/textMini"
+                        app:layout_constraintEnd_toEndOf="@id/tv_title"
+                        app:layout_constraintStart_toStartOf="@id/tv_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_year"
+                        tools:lines="5"
+                        tools:text="@tools:sample/lorem/random" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_favorite"
+                        style="@style/MButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        style="@style/MButton"
-                        android:text="Add to Favorite"
-                        android:drawableTint="@color/white"
-                        android:drawableStart="@drawable/ic_round_favorite"
                         android:layout_marginTop="@dimen/standardMargin"
-                        app:layout_constraintStart_toStartOf="@id/tv_details"
+                        android:drawableStart="@drawable/ic_round_favorite"
+                        android:drawableTint="@color/white"
+                        android:text="Add to Favorite"
                         app:layout_constraintEnd_toEndOf="@id/tv_details"
-                        app:layout_constraintTop_toBottomOf="@id/tv_details"/>
+                        app:layout_constraintStart_toStartOf="@id/tv_details"
+                        app:layout_constraintTop_toBottomOf="@id/tv_details" />
 
 
                     <View
                         android:id="@+id/separator1"
-                        android:layout_marginTop="@dimen/longMargin"
-                        app:layout_constraintTop_toBottomOf="@id/btn_favorite"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/separatorHeight"
-                        android:background="@color/background"/>
-                    
+                        android:layout_marginTop="@dimen/longMargin"
+                        android:background="@color/background"
+                        app:layout_constraintTop_toBottomOf="@id/btn_favorite" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/lineHeight"
                         android:background="@color/separator"
-                        app:layout_constraintTop_toTopOf="@id/separator1"/>
-                    
+                        app:layout_constraintTop_toTopOf="@id/separator1" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/header_overview"
+                        style="@style/MText.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/img_thumbnail"
-                        app:layout_constraintTop_toBottomOf="@id/separator1"
-                        style="@style/MText.Subtitle"
-                        android:text="Overview"
                         android:layout_marginTop="@dimen/parentPadding"
-                        />
+                        android:text="Overview"
+                        app:layout_constraintStart_toStartOf="@id/img_thumbnail"
+                        app:layout_constraintTop_toBottomOf="@id/separator1" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_overview"
+                        style="@style/MText.Normal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        style="@style/MText.Normal"
-                        tools:lines="4"
                         android:layout_marginTop="@dimen/halfMargin"
-                        tools:text="@tools:sample/lorem/random"
-                        app:layout_constraintTop_toBottomOf="@id/header_overview"
+                        app:layout_constraintEnd_toEndOf="@id/tv_title"
                         app:layout_constraintStart_toStartOf="@id/header_overview"
-                        app:layout_constraintEnd_toEndOf="@id/tv_title"/>
+                        app:layout_constraintTop_toBottomOf="@id/header_overview"
+                        tools:lines="4"
+                        tools:text="@tools:sample/lorem/random" />
 
                     <View
                         android:id="@+id/separator2"
-                        android:layout_marginTop="@dimen/parentPadding"
-                        app:layout_constraintTop_toBottomOf="@id/tv_overview"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/separatorHeight"
-                        android:background="@color/background"/>
+                        android:layout_marginTop="@dimen/parentPadding"
+                        android:background="@color/background"
+                        app:layout_constraintTop_toBottomOf="@id/tv_overview" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/lineHeight"
                         android:background="@color/separator"
-                        app:layout_constraintTop_toTopOf="@id/separator2"/>
+                        app:layout_constraintTop_toTopOf="@id/separator2" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/header_reviews"
+                        style="@style/MText.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/img_thumbnail"
-                        app:layout_constraintTop_toBottomOf="@id/separator2"
-                        style="@style/MText.Subtitle"
-                        android:text="Reviews"
                         android:layout_marginTop="@dimen/parentPadding"
-                        />
-                    
+                        android:text="Reviews"
+                        app:layout_constraintStart_toStartOf="@id/img_thumbnail"
+                        app:layout_constraintTop_toBottomOf="@id/separator2" />
+
                     <androidx.recyclerview.widget.RecyclerView
-                        android:layout_marginTop="@dimen/halfMargin"
-                        app:layout_constraintTop_toBottomOf="@id/header_reviews"
-                        android:nestedScrollingEnabled="false"
+                        android:id="@+id/rv_reviews"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                        
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/halfMargin"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/header_reviews"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_reviews" />
+
+                    <ProgressBar
+                        android:id="@+id/loading_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/longMargin"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/rv_reviews" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/empty_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_60sdp"
+                        android:text="Such an empty"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/rv_reviews" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.core.widget.NestedScrollView>

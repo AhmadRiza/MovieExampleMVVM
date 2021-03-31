@@ -61,5 +61,6 @@ class AppRepository @Inject constructor(
     suspend fun addToFavorite(movieItem: MovieItem) = dao.addFavorite(movieItem)
     suspend fun deleteFavorite(movieItem: MovieItem) = dao.deleteFavorite(movieItem)
 
+    fun getFavoriteMoviesDataSource() = dao.getFavoriteMovie()
 }
 

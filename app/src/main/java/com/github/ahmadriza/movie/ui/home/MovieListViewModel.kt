@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import com.github.ahmadriza.movie.data.repository.AppRepository
 import com.github.ahmadriza.movie.data.repository.source.MoviePagingSource
 import com.github.ahmadriza.movie.models.MovieItem
+import com.github.ahmadriza.movie.data.network.exception.UnKnownException
 import kotlinx.coroutines.flow.Flow
 
 class MovieListViewModel @ViewModelInject constructor(
@@ -23,7 +24,7 @@ class MovieListViewModel @ViewModelInject constructor(
                 1 -> repository.getUpcomingMovie(it)
                 2 -> repository.topRatedMovie(it)
                 3 -> repository.getNowPlayingMovie(it)
-                else -> throw Exception()
+                else -> throw UnKnownException()
             }
         }
     }.flow

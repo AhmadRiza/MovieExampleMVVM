@@ -12,7 +12,7 @@ import com.github.ahmadriza.movie.databinding.ItemMovieBinding
 import com.github.ahmadriza.movie.models.MovieItem
 import com.github.ahmadriza.movie.utils.*
 
-class MovieAdapter : PagingDataAdapter<MovieItem, RecyclerView.ViewHolder>(
+class MovieAdapter(private val listener: Listener) : PagingDataAdapter<MovieItem, RecyclerView.ViewHolder>(
     MovieModelComparator
 ) {
 
@@ -27,6 +27,7 @@ class MovieAdapter : PagingDataAdapter<MovieItem, RecyclerView.ViewHolder>(
             binding.tvOverview.text = movie.overview
             binding.tvOverview.setMaxLinesForEllipsizing()
             binding.imgThumbnail.loadImage(BuildConfig.IMG_URL_S+movie.posterPath)
+            binding.root.setOnClickListener { listener.onMovieClicked(movie) }
         }
     }
 
@@ -49,6 +50,10 @@ class MovieAdapter : PagingDataAdapter<MovieItem, RecyclerView.ViewHolder>(
             override fun areContentsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
                 oldItem == newItem
         }
+    }
+
+    interface Listener {
+        fun onMovieClicked(movie: MovieItem)
     }
 
 }

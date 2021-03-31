@@ -14,7 +14,8 @@
 
 
     <dimen name="roundShape">@dimen/_6sdp</dimen>
-    <dimen name="separatorH">@dimen/_1sdp</dimen>
+    <dimen name="lineHeight">@dimen/_1sdp</dimen>
+    <dimen name="separatorHeight">@dimen/_8sdp</dimen>
     <dimen name="hairline">0.8dp</dimen>
     <dimen name="buttonCorner">@dimen/_4sdp</dimen>
 

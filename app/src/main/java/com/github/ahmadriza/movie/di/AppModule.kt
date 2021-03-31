@@ -1,5 +1,6 @@
 package com.github.ahmadriza.movie.di
 
+import com.github.ahmadriza.movie.data.local.db.MovieFavoriteDao
 import com.github.ahmadriza.movie.data.network.MovieService
 import com.github.ahmadriza.movie.data.repository.AppRepository
 import dagger.Module
@@ -20,8 +21,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepository(
-        movieService: MovieService
-    ): AppRepository = AppRepository(movieService)
+        movieService: MovieService,
+        movieFavDao: MovieFavoriteDao
+    ): AppRepository = AppRepository(movieService, movieFavDao)
+
 
 
 }

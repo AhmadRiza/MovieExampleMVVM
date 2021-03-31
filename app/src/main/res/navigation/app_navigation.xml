@@ -9,5 +9,17 @@
         android:id="@+id/movieListFragment"
         tools:layout="@layout/fragment_movie_list"
         android:name="com.github.ahmadriza.movie.ui.home.MovieListFragment"
-        android:label="MovieListFragment" />
+        android:label="MovieListFragment" >
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.github.ahmadriza.movie.ui.details.MovieDetailFragment"
+        android:label="MovieDetailFragment" >
+        <argument
+            android:name="MovieItem"
+            app:argType="com.github.ahmadriza.movie.models.MovieItem" />
+    </fragment>
 </navigation>

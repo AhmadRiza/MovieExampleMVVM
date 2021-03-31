@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.paging.LoadState
 import com.github.ahmadriza.movie.R
 import com.github.ahmadriza.movie.databinding.FragmentMovieListBinding
+import com.github.ahmadriza.movie.models.MovieItem
 import com.github.ahmadriza.movie.ui.category.CategorySelectorSheet
 import com.github.ahmadriza.movie.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,13 +18,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
+class MovieListFragment : BaseFragment<FragmentMovieListBinding>(), MovieAdapter.Listener {
 
     private val viewModel: MovieListViewModel by viewModels()
-    private val movieAdapter by lazy { MovieAdapter() }
+    private val movieAdapter by lazy { MovieAdapter(this) }
     override fun getLayoutResource(): Int = R.layout.fragment_movie_list
-
-    private val sheetCategory by lazy { CategorySelectorSheet() }
 
     override fun initViews() {
 
@@ -61,7 +60,6 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
         lifecycleScope.launch {
             viewModel.movieDataSource.collectLatest {
                 movieAdapter.submitData(it)
-                Toast.makeText(requireContext(), "updated!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -69,9 +67,14 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>() {
 
     override fun initData() {
 
-        val defaultCategory = resources.getStringArray(R.array.categories)[0]
+        val defaultCategory = resources.getStringArray(R.array.categories)[viewModel.getSelectedCategory()]
         binding.tvCategory.text = defaultCategory
 
+    }
+
+    override fun onMovieClicked(movie: MovieItem) {
+        val action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movie)
+        findNavController().navigate(action)
     }
 
 }

@@ -1,10 +1,12 @@
 package com.github.ahmadriza.movie.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 @Entity
 data class MovieItem(
     @PrimaryKey val id: Long,
@@ -15,8 +17,7 @@ data class MovieItem(
     val title: String,
     @SerializedName("original_title") val originalTitle: String,
     @SerializedName("vote_average") val voteAvg: Float
-
-)
+): Parcelable
 
 data class MovieGenre(val name: String)
 data class MovieCompany(val name: String, @SerializedName("logo_path") val logo: String)

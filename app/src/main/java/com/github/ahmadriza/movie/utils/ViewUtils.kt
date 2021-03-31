@@ -3,7 +3,10 @@ package com.github.ahmadriza.movie.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +15,20 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.doOnPreDraw
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.github.ahmadriza.movie.utils.android.CurrencyTextWatcher
 import com.github.ahmadriza.movie.utils.android.DelayTextWatcher
 import com.github.ahmadriza.movie.utils.android.InfiniteScrollListener
+
 
 /**
  * Created on 11/28/20.
@@ -40,7 +46,7 @@ fun String.isAnValidEmail(): Boolean {
 
 fun EditText.addOnSubmitListener(delay: Long, onSubmit: (s: String) -> Unit) {
     addTextChangedListener(DelayTextWatcher(delay) {
-         onSubmit.invoke(it)
+        onSubmit.invoke(it)
     })
 }
 
@@ -53,7 +59,7 @@ fun AppCompatTextView.setDrawableIcon(
     )
 }
 
-fun AppCompatEditText.setDrawableIcon(
+fun AppCompatButton.setDrawableIcon(
     leftDrawable: Int = 0, topDrawable: Int = 0,
     rightDrawable: Int = 0, bottomDrawable: Int = 0
 ) {
@@ -62,14 +68,33 @@ fun AppCompatEditText.setDrawableIcon(
     )
 }
 
+fun AppCompatButton.setDrawableTint(color: Int) {
+    val drawables: Array<Drawable> = compoundDrawables
+    for (drawable in drawables) {
+        if (drawable != null) {
+            val wrappedDrawable = DrawableCompat.wrap(drawable)
+            DrawableCompat.setTint(wrappedDrawable, context.getCompatColor(color))
+        }
+    }
+}
 
-fun View.getYPosition(activity: Activity, rootView: View): Int{
+
+fun TextView.loadHTML(html: String) {
+    text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT)
+    } else {
+        Html.fromHtml(html)
+    }
+}
+
+
+fun View.getYPosition(activity: Activity, rootView: View): Int {
 
     val dm = DisplayMetrics()
     activity.windowManager.defaultDisplay.getMetrics(dm)
     val topOffset = dm.heightPixels - rootView.measuredHeight
 
-    val loc = intArrayOf(0,0)
+    val loc = intArrayOf(0, 0)
     getLocationOnScreen(loc)
 
     return loc[1] - topOffset
@@ -105,9 +130,9 @@ fun EditText.attachCurrencyFormatter() {
     addTextChangedListener(CurrencyTextWatcher(this))
 }
 
-fun RecyclerView.onScrollLoad(threshold: Int, action:()->Unit){
-    val lm = (layoutManager as LinearLayoutManager?)?: return
-    addOnScrollListener(object : InfiniteScrollListener(lm, threshold){
+fun RecyclerView.onScrollLoad(threshold: Int, action: () -> Unit) {
+    val lm = (layoutManager as LinearLayoutManager?) ?: return
+    addOnScrollListener(object : InfiniteScrollListener(lm, threshold) {
         override fun loadMore() {
             action.invoke()
         }
@@ -121,8 +146,9 @@ fun TextView.setMaxLinesForEllipsizing() = doOnPreDraw {
     maxLines = numberOfCompletelyVisibleLines
 }
 
-fun ImageView.loadImage(url: String){
-    Glide.with(this)
+fun ImageView.loadImage(url: String, roundCorner: Int = 0) {
+    val builder = Glide.with(this)
         .load(url)
-        .into(this)
+    if (roundCorner > 0) builder.transform(CenterCrop(), RoundedCorners(roundCorner))
+    builder.into(this)
 }

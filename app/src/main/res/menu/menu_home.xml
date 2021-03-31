@@ -7,6 +7,5 @@
         android:title="Favorite"
         android:icon="@drawable/ic_round_favorite"
         app:showAsAction="always"
-        android:iconTint="#E91E63"
         />
 </menu>

@@ -20,15 +20,15 @@ import javax.inject.Singleton
 @Module
 object LocalModule {
 
-//    @Singleton
-//    @Provides
-//    fun provideDB(@ApplicationContext context: Context): AppDB = Room
-//        .databaseBuilder(context, AppDB::class.java, "mymovie")
-//        .fallbackToDestructiveMigration()
-//        .build()
-//
-//    @Singleton
-//    @Provides
-//    fun provideCryptoDao(appDB: AppDB): MovieFavoriteDao = appDB.favoriteDao()
+    @Singleton
+    @Provides
+    fun provideDB(@ApplicationContext context: Context): AppDB = Room
+        .databaseBuilder(context, AppDB::class.java, "mymovie")
+        .fallbackToDestructiveMigration()
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideCryptoDao(appDB: AppDB): MovieFavoriteDao = appDB.favoriteDao()
 
 }

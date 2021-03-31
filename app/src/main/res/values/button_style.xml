@@ -2,10 +2,10 @@
 <resources>
 
     <style name="MButton">
-        <item name="android:background">@drawable/bg_button_green</item>
-        <item name="fontFamily">@font/bold</item>
+        <item name="android:background">@drawable/bg_button_accent</item>
+        <item name="fontFamily">@font/medium</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:minHeight">@dimen/_28sdp</item>
+        <item name="android:minHeight">@dimen/_24sdp</item>
         <item name="android:minWidth">0dp</item>
         <item name="android:elevation">0dp</item>
         <item name="android:paddingStart">@dimen/_12sdp</item>
@@ -16,7 +16,7 @@
     </style>
 
     <style name="MButton.Secondary">
-        <item name="android:background">@drawable/bg_button_green_invert</item>
+        <item name="android:background">@drawable/bg_button_accent_invert</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 

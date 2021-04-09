@@ -10,10 +10,10 @@ import java.util.*
  * Created on 12/3/20.
  */
 
-fun String.toDateOrNull(pattern: String = "yyyy-MM-dd", timezone: String = "GMT"): Date? = try {
+fun String?.toDateOrNull(pattern: String = "yyyy-MM-dd", timezone: String = "GMT"): Date? = try {
     val sdf = SimpleDateFormat(pattern, Locale.getDefault())
     sdf.timeZone = TimeZone.getTimeZone(timezone)
-    sdf.parse(this)
+    sdf.parse(this?: "null")
 } catch (e: ParseException) {
     null
 }

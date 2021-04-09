@@ -1,8 +1,7 @@
 package com.github.ahmadriza.movie.ui.home
 
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -15,13 +14,14 @@ import com.github.ahmadriza.movie.models.MovieItem
 import com.github.ahmadriza.movie.ui.category.CategorySelectorSheet
 import com.github.ahmadriza.movie.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieListFragment : BaseFragment<FragmentMovieListBinding>(), MovieAdapter.Listener {
 
-    private val viewModel: MovieListViewModel by viewModels()
+    private val viewModel: MovieListViewModel by navGraphViewModels(R.id.app_navigation) { defaultViewModelProviderFactory }
     private val movieAdapter by lazy { MovieAdapter(this) }
     override fun getLayoutResource(): Int = R.layout.fragment_movie_list
 

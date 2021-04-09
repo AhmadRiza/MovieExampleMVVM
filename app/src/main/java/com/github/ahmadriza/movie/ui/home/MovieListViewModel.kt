@@ -2,9 +2,11 @@ package com.github.ahmadriza.movie.ui.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.github.ahmadriza.movie.data.repository.AppRepository
 import com.github.ahmadriza.movie.data.repository.source.MoviePagingSource
 import com.github.ahmadriza.movie.models.MovieItem
@@ -27,7 +29,7 @@ class MovieListViewModel @ViewModelInject constructor(
                 else -> throw UnKnownException()
             }
         }
-    }.flow
+    }.flow.cachedIn(viewModelScope)
 
     fun setCategory(index: Int) {
         this.currentCategory = index

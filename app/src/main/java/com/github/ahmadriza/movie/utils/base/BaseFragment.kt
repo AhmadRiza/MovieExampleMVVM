@@ -32,14 +32,15 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), IBaseView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
-
+        if(savedInstanceState == null) initViews()
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initObservers()
-        initData()
+        if(savedInstanceState == null){
+            initObservers()
+            initData()
+        }
     }
 }
